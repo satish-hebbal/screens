@@ -1,35 +1,81 @@
+import React, { useCallback } from 'react';
 import { Tabs } from 'expo-router';
-import React from 'react';
+import { MaterialIcons } from '@expo/vector-icons';
+import CustomTabBar from '@/components/CustomTabBar';
+import { useFonts } from 'expo-font';
+import * as SplashScreen from 'expo-splash-screen';
+import { Image } from 'react-native';
 
-import { TabBarIcon } from '@/components/navigation/TabBarIcon';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
+SplashScreen.preventAutoHideAsync();
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
+  const [fontsLoaded] = useFonts({
+    'Lexend-Regular': require('../../assets/fonts/Lexend-Regular.ttf'),
+    'Lexend-Bold': require('../../assets/fonts/Lexend-Bold.ttf'),
+    'Lexend-Light': require('../../assets/fonts/Lexend-Light.ttf'),
+    'Lexend-SemiBold': require('../../assets/fonts/Lexend-SemiBold.ttf'),
+    'Lexend-Mid' : require('../../assets/fonts/Lexend-Medium.ttf'),
+    'Source-Serif-Regular' : require('../../assets/fonts/Source-Serif-Regular.ttf')
+  });
+
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded) {
+      await SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded]);
+
+  if (!fontsLoaded) {
+    return null;
+  }
 
   return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
-      }}>
+    <Tabs 
+      tabBar={(props) => <CustomTabBar {...props} />}
+      onLayout={onLayoutRootView}
+    >
       <Tabs.Screen
-        name="index"
+        name="screen_1"
         options={{
+          headerShown: false,
           title: 'Home',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'home' : 'home-outline'} color={color} />
+          tabBarIcon: 'home',
+        }}
+      />
+      <Tabs.Screen
+        name="screen_2"
+        options={{
+          headerShown: false,
+          title: 'Search',
+          tabBarIcon: 'search',
+        }}
+      />
+      <Tabs.Screen
+        name="screen_3"
+        options={{
+          headerShown: false,
+          title: 'Mandir',
+          tabBarIcon: ({ color, size }) => (
+            <Image 
+              source={require('../../assets/images/mandir-icon.png')}
+              style={{ width: size, height: size, tintColor: color }}
+            />
           ),
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="screen_4"
         options={{
-          title: 'Explore',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
-          ),
+          headerShown: false,
+          title: 'Donation',
+          tabBarIcon: 'favorite',
+        }}
+      />
+      <Tabs.Screen
+        name="screen_5"
+        options={{
+          headerShown: false,
+          title: 'Profile',
+          tabBarIcon: 'person',
         }}
       />
     </Tabs>
