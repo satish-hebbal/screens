@@ -18,7 +18,7 @@ export default function Screen1() {
               style={styles.headImage}
               />
           <Text style={styles.greeting}>Shubhodaya, <Text style={styles.greeting2}>Satish</Text></Text>
-        
+          
         </LinearGradient>
       </View>
 
@@ -26,6 +26,7 @@ export default function Screen1() {
 
       
       <View style={styles.wisdomCard}>
+        
         <Text style={styles.wisdomTitle}>Today's Wisdom</Text>
         <Image 
               source={require('../../assets/images/WisdomDejain.png')}
@@ -111,19 +112,19 @@ const styles = StyleSheet.create({
   },
   wisdomTitle: {
     fontFamily: 'Lexend-Regular',
-    fontSize: 14,
+    fontSize: 10,
     opacity: 0.5,
     color: '#666666',
   },
   wisdomQuote: {
     fontFamily: 'Source-Serif-Regular',
     fontSize: 18,
-    color: '#333333',
+    color: '#CC5C1F',
   },
   sectionTitle: {
     fontFamily: 'Lexend-SemiBold',
     fontSize: 20,
-    color: '#333333',
+    color: '#CC5C1F',
     marginTop: 30,
     marginBottom: 15,
   },
