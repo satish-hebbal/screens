@@ -53,7 +53,7 @@ const CustomSearchBar: React.FC<CustomSearchBarProps> = ({
       <View style={styles.searchBar}>
         <Animated.View style={[styles.overlay, { opacity: overlayOpacity }]}>
           <Image
-            source={require('../assets/icons/templeOverlay3.png')}
+            source={require('../assets/icons/templeOverlay4.png')}
             style={styles.templeIcon}
             resizeMode="contain"
           />
